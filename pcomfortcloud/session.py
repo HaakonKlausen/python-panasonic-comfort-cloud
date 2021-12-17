@@ -85,16 +85,6 @@ class Session(object):
 
             if self._raw: print("--- token found")
 
-            try:
-                self._get_groups()
-
-            except ResponseError:
-                if self._raw: print("--- token probably expired")
-
-                self._vid = None
-                self._devices = None
-                os.remove(self._tokenFileName)
-
         if self._vid is None:
             self._create_token()
             with open(self._tokenFileName, 'w') as tokenFile:
